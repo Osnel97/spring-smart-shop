@@ -1,0 +1,44 @@
+spring suite tools
+java jdk
+java extension pack
+lombok a
+
+
+package com.osnel97.springsmartshop.Service;
+
+import java.util.UUID;
+
+import org.hibernate.mapping.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.osnel97.springsmartshop.Repository.EmployeeRepository;
+import com.osnel97.springsmartshop.model.Employee;
+
+@Service
+public interface   EmployeeService {
+    private final EmployeeRepository employeeRepository;
+
+@Autowired
+public EmployeeService(EmployeeRepository employeeRepository){
+    this.employeeRepository = employeeRepository;
+}
+
+public Employee  addEmployee(Employee employee){
+    employee.setEmployeeCode(UUID.randomUUID().toString());
+    return employeeRepository.save(employee);
+}
+
+public List<Employee> findAllEmployees(){
+        return employeeRepository.findAll();
+
+}
+
+public Employee updateEmployee(Employee employee){
+    return employeeRepository.save(employee);
+}
+
+public Employee findEmployeeById(Lonf id){
+    return employeeRepository.findEmplooyee
+}
+}
