@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "employee_tbl")
 public class Employee implements Serializable {
@@ -19,6 +18,7 @@ public class Employee implements Serializable {
     private String fname;
     private String lname;
     private String email;
+    private String password;
     private String gender;
     private String jobTitle;
     private String phone;
@@ -27,10 +27,12 @@ public class Employee implements Serializable {
 
     }
 
-    public Employee(String fname, String lname, String email, String jobTitle, String phone, String gender ){
+    public Employee(String fname, String lname, String email, String password, String jobTitle, String phone, String gender ){
+    super();
     this.fname = fname;
     this.lname = lname;
     this.email = email;
+    this.password = password;
     this.jobTitle = jobTitle;
     this.phone = phone;
     this.gender = gender;
@@ -69,7 +71,15 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public String getJobTitle() {
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getJobtitle() {
         return jobTitle;
     }
 
@@ -83,7 +93,7 @@ public class Employee implements Serializable {
 
     public void setPhone(String phone) {
     this.phone = phone;
-}
+    }
 
     public String getGender() {
         return gender;
@@ -95,7 +105,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", jobTitle="
+        return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", password=" + password + ", jobTitle="
                 + jobTitle + ", phone=" + phone + ", gender=" + gender + "]";
     }
     

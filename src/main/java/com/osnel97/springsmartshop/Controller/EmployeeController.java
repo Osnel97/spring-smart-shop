@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 @RequestMapping("/smart-shop")
 public class EmployeeController {
@@ -25,17 +24,18 @@ private final EmployeeService employeeService;
 
 @Autowired
 public EmployeeController(EmployeeService employeeService){
+    super();
     this.employeeService = employeeService;
 }
 
 @PostMapping("/employee/add")
 public ResponseEntity<?> addemployee(@RequestBody Employee employee){
-//Optional<Employee> userIsExist = EmployeeService.findByEmail(Employee.getEmail());
-//if(userIsExist.isPresent()){
-//    return ResponseEntity.badRequest().body("Email Already Taken");
-//}
+Optional<Employee> userIsExist = employeeService.findByEmail(employee.getEmail());
+if(userIsExist.isPresent()){
+    return ResponseEntity.badRequest().body("Email is Already Used by another User");
+}
     Employee newEmployee = employeeService.addEmployee(employee);
-    return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
+    return new ResponseEntity<>(newEmployee, HttpStatus.OK);
 }
 
 @GetMapping("/employee/all")
@@ -51,15 +51,23 @@ public ResponseEntity<?> getEmployeeById(@PathVariable Long id){
 }
 
 @PutMapping("/employee/update/{id}")
-public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
+public ResponseEntity<?> updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
+Optional<Employee> userIsExist = employeeService.findById(id);
+if(userIsExist.isPresent()){
 Employee updateEmployee = employeeService.updateEmployee(id, employee);
 return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
+}
+    return ResponseEntity.badRequest().body("User with the requested id is not found");
 }
 
 @DeleteMapping("/employee/delete/{id}")
 public ResponseEntity<?> deleteEmployee(@PathVariable Long id){
-employeeService.deleteEmployee(id);
-return new ResponseEntity<>(HttpStatus.OK);
+Optional<Employee> userIsExist = employeeService.findById(id);
+if(userIsExist.isPresent()){
+    employeeService.deleteEmployee(id);
+    return new ResponseEntity<>(HttpStatus.OK);
+}
+    return ResponseEntity.badRequest().body("User with the requested id is not found");
 }
 
 }

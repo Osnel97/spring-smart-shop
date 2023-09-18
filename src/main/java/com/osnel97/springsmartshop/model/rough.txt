@@ -1,0 +1,35 @@
+[
+    {
+        "fname": "jackson",
+        "lname": "hosea",
+        "email": "jackson@gmail.com",
+        "password": "Pass@123",
+        "jobTitle": "mechanical engineer",
+        "phone": "255625009895",
+        "gender": "male"
+        
+    },
+
+    {
+        "fname": "osnel",
+        "lname": "hosea",
+        "email": "nellysjonathan12@gmail.com",
+        "password": "Pass@123",
+        "jobTitle": "System developer",
+        "phone": "255625009895",
+        "gender": "male"
+        
+    },
+
+   {
+    "id": 13,
+    "fname": "osnel",
+    "lname": "hosea",
+    "email": "nellysjonathan26@gmail.com",
+    "password": "$2a$10$e1OgPGmZcWgzVgwJ8Mrvkugi2jwN1Z2u1308XULUQa005V7t3tXAi",
+    "gender": "male",
+    "phone": "255625009895",
+    "jobTitle": "System developer"
+}
+
+]

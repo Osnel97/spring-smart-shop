@@ -12,5 +12,4 @@ public interface EmployeeService {
     Optional<Employee> findByEmail(String email);
     Employee updateEmployee(long id, Employee employee);
     void deleteEmployee(long id);
-
 }

@@ -1,0 +1,6 @@
+POST localhost:8081/smart-shop/employee/add
+GET  localhost:8081/smart-shop/employee/all
+GET  localhost:8081/smart-shop/employee/{id}
+PUT  localhost:8081/smart-shop/employee/update/{id}
+DELETE localhost:8081/smart-shop/employee/delete/{id}
+
