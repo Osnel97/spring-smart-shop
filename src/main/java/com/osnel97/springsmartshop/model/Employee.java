@@ -20,20 +20,20 @@ public class Employee implements Serializable {
     private String email;
     private String password;
     private String gender;
-    private String jobTitle;
+    private String jobtitle;
     private String phone;
 
     public Employee(){
 
     }
 
-    public Employee(String fname, String lname, String email, String password, String jobTitle, String phone, String gender ){
+    public Employee(String fname, String lname, String email, String password, String jobtitle, String phone, String gender ){
     super();
     this.fname = fname;
     this.lname = lname;
     this.email = email;
     this.password = password;
-    this.jobTitle = jobTitle;
+    this.jobtitle = jobtitle;
     this.phone = phone;
     this.gender = gender;
     }
@@ -80,11 +80,11 @@ public class Employee implements Serializable {
     }
 
     public String getJobtitle() {
-        return jobTitle;
+        return jobtitle;
     }
 
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
+    public void setJobTitle(String jobtitle) {
+        this.jobtitle = jobtitle;
     }
 
     public String getPhone() {
@@ -106,7 +106,7 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", password=" + password + ", jobTitle="
-                + jobTitle + ", phone=" + phone + ", gender=" + gender + "]";
+                + jobtitle + ", phone=" + phone + ", gender=" + gender + "]";
     }
     
 }

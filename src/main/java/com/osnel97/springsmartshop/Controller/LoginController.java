@@ -1,6 +1,8 @@
 package com.osnel97.springsmartshop.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +20,8 @@ import com.osnel97.springsmartshop.model.Login;
 public class LoginController {
     private final EmployeeService employeeService;
     private final AuthService authService;
+    Map<String, String> response = new HashMap<>();
 
-    @Autowired
     public LoginController(EmployeeService employeeService, AuthService authService){
     super();
     this.employeeService = employeeService;
@@ -27,14 +29,16 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Login login){
+    public ResponseEntity<Map<String, String>> login(@RequestBody Login login){
     Employee loginemployee = employeeService.findByEmail(login.getEmail()).orElseThrow(null);
 
     if(loginemployee != null && authService.checkPassword(login.getPassword(), loginemployee.getPassword())){
-        return ResponseEntity.ok().build();
+        response.put("message", "success");
+        return ResponseEntity.ok(response);
     }
     else{
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        response.put("message", "Unauthorized: Invalid email or password");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.osnel97.springsmartshop.Service.EmployeeService;
 import com.osnel97.springsmartshop.model.Employee;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class EmployeeController {
 private final EmployeeService employeeService;
 
-@Autowired
+
 public EmployeeController(EmployeeService employeeService){
     super();
     this.employeeService = employeeService;
@@ -46,8 +45,20 @@ public ResponseEntity<List<Employee>> getallEmployees(){
 
 @GetMapping("/employee/{id}")
 public ResponseEntity<?> getEmployeeById(@PathVariable Long id){
-    Optional<Employee> employee = employeeService.findById(id);
+Optional<Employee> userIsExist = employeeService.findById(id);
+if(userIsExist.isPresent()){
+return new ResponseEntity<>(userIsExist, HttpStatus.OK);
+}
+    return ResponseEntity.badRequest().body("User with the requested id is not found");
+}
+
+@GetMapping("/employee/email/{email}")
+public ResponseEntity<?> getEmployeeByEmail(@PathVariable String email){
+Optional<Employee> employee = employeeService.findByEmail(email);
+if(employee.isPresent()){
     return new ResponseEntity<>(employee, HttpStatus.OK);
+    }
+    return ResponseEntity.badRequest().body("User with the requested email is not found");
 }
 
 @PutMapping("/employee/update/{id}")
